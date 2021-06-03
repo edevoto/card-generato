@@ -14,11 +14,29 @@
   </head>
 
   <body>
-    <div class="container-fluid text-center display-3 font-weight-bold">
-      <div class="card">
+    <div class="container-fluid">
+    <div class="row py-2">
+      <div class="col-12 col-md-3">
+        <input type="text" class="form-control" placeholder="N. of cards" />
+      </div>
+      <div class="col-5  col-sm-1 col-md-3">
+        <button type="submit" class="btn btn-primary btn-sm w-100"">
+          Draw
+        </button>
+      </div>
+      <div class="col-5 col-sm-1 col-md-3">
+        <button type="submit" class="btn btn-primary btn-sm w-100">
+          Sort
+        </button>
+      </div>
+    </div>
+
+    <div class="row py-2 text-center display-md-3 font-weight-bold">
+      <div class="card col-12 text-center">
         <span>A</span>
       </div>
     </div>
+  </div>
     <script src="app.js"></script>
   </body>
 </html>
