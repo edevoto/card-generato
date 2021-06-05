@@ -27,7 +27,6 @@ let randomNumber = () => {
 let randomType = () => {
   let type = ["diamond", "spades", "heart", "clover"];
   let typeI = Math.floor(Math.random() * type.length);
-
   return type[typeI];
 };
 
@@ -40,6 +39,7 @@ let randomType = () => {
 
 //gets an array of cards.
 //Need to place the cardas one on side of another. with clasees.
+
 let cardArray = [];
 
 const cardGenerator = () => {
@@ -51,15 +51,34 @@ const cardGenerator = () => {
                     <span>${randomNumber()}</span>
                     </div>`);
   }
+
   for (let j = 0; j < cardArray.length; j++) {
     cardContainer.innerHTML += cardArray[j];
   }
-  console.log(cardArray);
-  console.log(inputValue);
-};
 
+  //console.log(cardArray);
+  //console.log(inputValue);
+};
+const sortCard = arr => {
+  let wall = cardArray.length - 1; //we start the wall at the end of the array
+  while (wall > 0) {
+    let index = 0;
+    while (index < wall) {
+      //compare the adjacent positions, if the right one is bigger, we have to swap
+      if (arr[index] > arr[index + 1]) {
+        let aux = arr[index];
+        arr[index] = arr[index + 1];
+        arr[index + 1] = aux;
+      }
+      index++;
+    }
+    wall--; //decrease the wall for optimization
+  }
+  return console.log(arr);
+};
 document.querySelector("#draw").addEventListener("click", cardGenerator);
 
+document.querySelector("#sort").addEventListener("click", sortCard());
 //sort the array
 
 //map the card html
