@@ -55,8 +55,7 @@ body {
   content: "\2663";
   color: black;
   font-size: 90px;
-
-  font-family: "Times New Roman", Times, serif;
+  t-family: "Times New Roman", Times, serif;
   font-weight: 900;
 }
 

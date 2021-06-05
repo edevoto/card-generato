@@ -31,21 +31,23 @@ let randomType = () => {
   return type[typeI];
 };
 
-window.onload = () => {
-  let card = document.querySelector(".card");
-  card.classList.add(randomType());
-  card.innerHTML = randomNumber();
-};
+//create a card when entering the page
+//window.onload = () => {
+// let card = document.querySelector(".card");
+// card.classList.add(randomType());
+// card.innerHTML = randomNumber();
+////};
+
+//gets an array of cards.
+//Need to place the cardas one on side of another. with clasees.
 let cardArray = [];
 
 const cardGenerator = () => {
   let cardContainer = document.querySelector(".card-container");
-  let inputValue = document.querySelector("#numberOfCards").value;
-  // let cardCode = `<div class="card ${randomType()} row text-center">
-  //               <span>${randomNumber()}</span>
-  //               </div>`;
+  let inputValue = document.querySelector("#numberOfCards").value; // Creamos esto para obtener el valor del input.
+
   for (let i = 0; i < inputValue; i++) {
-    cardArray.push(`<div class="card ${randomType()} col-4 m-5 text-center">
+    cardArray.push(`<div class="card ${randomType()} col-6 col-md-2 m-5 d-block position-relative text-center">
                     <span>${randomNumber()}</span>
                     </div>`);
   }
@@ -58,12 +60,9 @@ const cardGenerator = () => {
 
 document.querySelector("#draw").addEventListener("click", cardGenerator);
 
+//sort the array
+
 //map the card html
-
-// = createElement("div");
-
-// newCard.classList.add(randomType());
-// newCard.innerHTML = randomNumber();
 
 //Con el boton de draw y el text input generar la cantidad de cartas que es ingresada.
 //Con el boton sort mostrar las cartas en orden, usando el algoritmo bubble.
