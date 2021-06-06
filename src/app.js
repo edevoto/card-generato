@@ -30,18 +30,12 @@ let randomType = () => {
   return type[typeI];
 };
 
-//create a card when entering the page
-//window.onload = () => {
-// let card = document.querySelector(".card");
-// card.classList.add(randomType());
-// card.innerHTML = randomNumber();
-////};
 
 //gets an array of cards.
 //Need to place the cardas one on side of another. with clasees.
 
 let cardArray = [];
-
+let newArray = [];
 const cardGenerator = () => {
   let cardContainer = document.querySelector(".card-container");
   let inputValue = document.querySelector("#numberOfCards").value; // Creamos esto para obtener el valor del input.
@@ -51,16 +45,33 @@ const cardGenerator = () => {
                     <span>${randomNumber()}</span>
                     </div>`);
   }
-
   for (let j = 0; j < cardArray.length; j++) {
     cardContainer.innerHTML += cardArray[j];
-  }
+    var newArray = cardArray.map(function() {
+      while (cardArray > 0) {
+        while (j < cardArray) {
+          //compare the adjacent positions, if the right one is bigger, we have to swap
+          if (cardArray[j] > cardArray[j + 1]) {
+            let aux = cardArray[j];
+            cardArray[j] = cardArray[j + 1];
+            cardArray[j + 1] = aux;
+          }
+          index++;
+        }
+        cardArray--; //decrease the wall for optimization
+      }
+      return cardArray;
+    });
 
-  //console.log(cardArray);
-  //console.log(inputValue);
+    newArray.concat(cardArray).push(newArray);
+    localStorage.setItem("first card array", newArray.value);
+    console.log(newArray);
+  }
+  
 };
-const sortCard = arr => {
-  let wall = cardArray.length - 1; //we start the wall at the end of the array
+
+let sortedArray = newArray.sort(arr => {
+  let wall = newArray.length - 1; //we start the wall at the end of the array
   while (wall > 0) {
     let index = 0;
     while (index < wall) {
@@ -74,16 +85,13 @@ const sortCard = arr => {
     }
     wall--; //decrease the wall for optimization
   }
-  return console.log(arr);
-};
-document.querySelector("#draw").addEventListener("click", cardGenerator);
 
-document.querySelector("#sort").addEventListener("click", sortCard());
-//sort the array
+  return arr;
+});
 
-//map the card html
+let drawButton = document.querySelector("#draw");
+drawButton.addEventListener("click", cardGenerator);
+let sortButton = document.querySelector("#sort");
+sortButton.addEventListener("click", sortedArray);
 
-//Con el boton de draw y el text input generar la cantidad de cartas que es ingresada.
-//Con el boton sort mostrar las cartas en orden, usando el algoritmo bubble.
-//Guardar los cambios(tirada de cartas) en un array.
-//mostrar por console.log las 'manos' que se imprimieron.
+
