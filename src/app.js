@@ -30,53 +30,37 @@ let randomType = () => {
   return type[typeI];
 };
 
-
 //gets an array of cards.
 //Need to place the cardas one on side of another. with clasees.
 
 let cardArray = [];
-let newArray = [];
 const cardGenerator = () => {
   let cardContainer = document.querySelector(".card-container");
   let inputValue = document.querySelector("#numberOfCards").value; // Creamos esto para obtener el valor del input.
-
+  let cardText = document.querySelector("#text");
   for (let i = 0; i < inputValue; i++) {
-    cardArray.push(`<div class="card ${randomType()} col-6 col-md-2 m-5 d-block position-relative text-center">
-                    <span>${randomNumber()}</span>
-                    </div>`);
-  }
-  for (let j = 0; j < cardArray.length; j++) {
-    cardContainer.innerHTML += cardArray[j];
-    var newArray = cardArray.map(function() {
-      while (cardArray > 0) {
-        while (j < cardArray) {
-          //compare the adjacent positions, if the right one is bigger, we have to swap
-          if (cardArray[j] > cardArray[j + 1]) {
-            let aux = cardArray[j];
-            cardArray[j] = cardArray[j + 1];
-            cardArray[j + 1] = aux;
-          }
-          index++;
-        }
-        cardArray--; //decrease the wall for optimization
-      }
-      return cardArray;
-    });
+    let num = randomNumber();
+    let type = randomType();
+    cardText.createElement.add("H1");
+    let div = document.createElement("DIV");
+    div.classList.add("card", "justify-content-between", type);
 
-    newArray.concat(cardArray).push(newArray);
-    localStorage.setItem("first card array", newArray.value);
-    console.log(newArray);
+    cardContainer.appendChild(div);
+    cardArray.push({ numero: num, tipo: type });
   }
-  
+
+  console.log(cardArray);
 };
 
-let sortedArray = newArray.sort(arr => {
-  let wall = newArray.length - 1; //we start the wall at the end of the array
+//Hacer un recorrido al cardArray y con el mismo metodo para mostar las cartas mostrar ya obtenidas. pero sin el random si no desde el array.
+
+const sortedArray = arr => {
+  let wall = arr.length - 1; //we start the wall at the end of the array
   while (wall > 0) {
     let index = 0;
     while (index < wall) {
       //compare the adjacent positions, if the right one is bigger, we have to swap
-      if (arr[index] > arr[index + 1]) {
+      if (arr[index].numero > arr[index + 1].numero) {
         let aux = arr[index];
         arr[index] = arr[index + 1];
         arr[index + 1] = aux;
@@ -85,13 +69,18 @@ let sortedArray = newArray.sort(arr => {
     }
     wall--; //decrease the wall for optimization
   }
+  for (let i = 0; i < cardArray.length - 1; i++) {
+    let aux = cardArray[i + 1];
+    aux++;
+  }
 
   return arr;
-});
+};
 
 let drawButton = document.querySelector("#draw");
 drawButton.addEventListener("click", cardGenerator);
 let sortButton = document.querySelector("#sort");
-sortButton.addEventListener("click", sortedArray);
-
-
+sortButton.addEventListener("click", function() {
+  sortedArray(cardArray);
+  console.log(cardArray);
+});
