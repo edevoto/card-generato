@@ -33,20 +33,32 @@ let randomType = () => {
 //gets an array of cards.
 //Need to place the cardas one on side of another. with clasees.
 
+
 let cardArray = [];
+
 const cardGenerator = () => {
   let cardContainer = document.querySelector(".card-container");
   let inputValue = document.querySelector("#numberOfCards").value; // Creamos esto para obtener el valor del input.
-  let cardText = document.querySelector("#text");
+
   for (let i = 0; i < inputValue; i++) {
     let num = randomNumber();
     let type = randomType();
-    cardText.createElement.add("H1");
-    let div = document.createElement("DIV");
-    div.classList.add("card", "justify-content-between", type);
 
+    let div = document.createElement("DIV");
+    div.classList.add("card", "justify-content-between", type, "text-center");
     cardContainer.appendChild(div);
     cardArray.push({ numero: num, tipo: type });
+
+    let text = document.createElement("H1");
+    text.textContent = randomNumber();
+    div.appendChild(text);
+    if (div.className.value === "diamond") {
+      text.classList.add("display-2", "m-auto", "text-danger");
+    } else if (div.className.value === "heart") {
+      text.classList.add("display-2", "m-auto", "text-danger");
+    } else {
+      text.classList.add("display-2", "m-auto", "text-black");
+    }
   }
 
   console.log(cardArray);
