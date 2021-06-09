@@ -33,7 +33,6 @@ let randomType = () => {
 //gets an array of cards.
 //Need to place the cardas one on side of another. with clasees.
 
-
 let cardArray = [];
 
 const cardGenerator = () => {
@@ -61,7 +60,7 @@ const cardGenerator = () => {
     }
   }
 
-  console.log(cardArray);
+  //console.log(cardArray);
 };
 
 //Hacer un recorrido al cardArray y con el mismo metodo para mostar las cartas mostrar ya obtenidas. pero sin el random si no desde el array.
@@ -73,7 +72,7 @@ const sortedArray = arr => {
     while (index < wall) {
       //compare the adjacent positions, if the right one is bigger, we have to swap
       if (arr[index].numero > arr[index + 1].numero) {
-        let aux = arr[index];
+        let aux = cardArray[index];
         arr[index] = arr[index + 1];
         arr[index + 1] = aux;
       }
@@ -81,11 +80,6 @@ const sortedArray = arr => {
     }
     wall--; //decrease the wall for optimization
   }
-  for (let i = 0; i < cardArray.length - 1; i++) {
-    let aux = cardArray[i + 1];
-    aux++;
-  }
-
   return arr;
 };
 
