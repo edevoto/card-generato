@@ -3,21 +3,7 @@ import "bootstrap";
 import "./style.css";
 
 let randomNumber = () => {
-  let numbers = [
-    "A",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "J",
-    "Q",
-    "K"
-  ];
+  let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
   let numI = Math.floor(Math.random() * numbers.length);
 
@@ -30,12 +16,29 @@ let randomType = () => {
   return type[typeI];
 };
 
+const changeValue = num => {
+  switch (num) {
+    case 1:
+      return "A";
+    case 11:
+      return "J";
+    case 12:
+      return "Q";
+    case 13:
+      return "K";
+    default:
+      return num;
+  }
+};
 //gets an array of cards.
 //Need to place the cardas one on side of another. with clasees.
 
 let cardArray = [];
 let cardContainer = document.querySelector(".card-container");
 const cardGenerator = () => {
+  cardArray = [];
+  cardContainer.innerHTML = "";
+
   let inputValue = document.querySelector("#numberOfCards").value; // Creamos esto para obtener el valor del input.
 
   for (let i = 0; i < inputValue; i++) {
@@ -43,11 +46,12 @@ const cardGenerator = () => {
     let div = document.createElement("DIV");
     div.classList.add(type);
     let text = document.createElement("H1");
-    text.textContent = randomNumber();
+    let num = randomNumber();
+    text.textContent = changeValue(num);
     div.appendChild(text);
     cardArray.push({
-      numero: div.className,
-      tipo: text.textContent
+      numero: num,
+      tipo: div.className
     });
     div.classList.add("card", "justify-content-between", "text-center");
     cardContainer.appendChild(div);
@@ -76,32 +80,41 @@ const sortedArray = arr => {
         arr[index + 1] = aux;
       }
       index++;
+      let newCardContainer = document.createElement("DIV");
+      //let card = document.querySelector(".card");
+      newCardContainer.classList.add("row", "card-container");
+      cardArray.forEach(card => {
+        const pinta = card.tipo;
+        const valor = card.numero;
+
+        let newDiv = document.createElement("DIV");
+        newDiv.classList.add(
+          "card",
+          "justify-content-between",
+          "text-center",
+          pinta
+        );
+
+        console.log(newDiv);
+        newCardContainer.appendChild(newDiv);
+        let text = document.createElement("H1");
+        text.textContent = changeValue(valor);
+        newDiv.appendChild(text);
+
+        if (newDiv.className.value === "diamond") {
+          text.classList.add("display-2", "m-auto", "text-danger");
+        } else if (newDiv.className.value === "heart") {
+          text.classList.add("display-2", "m-auto", "text-danger");
+        } else {
+          text.classList.add("display-2", "m-auto", "text-black");
+        }
+        document.body.appendChild(newCardContainer);
+      });
     }
     wall--; //decrease the wall for optimization
   }
 
-  let newCardContainer = document.createElement("DIV");
-  let card = document.querySelector(".card");
-  cardArray.forEach(card => {
-    //const pinta =
-    const valor = cardArray.tipo;
-
-    document.createElement("DIV");
-    let newDiv = document.querySelector(".card");
-    newDiv.classList.add(
-      "card",
-      "justify-content-between",
-      "text-center",
-      card.numero
-    );
-    console.log(newDiv);
-    let text = document.createElement("H1");
-    text.textContent = valor;
-    newCardContainer.appendChild(newDiv);
-    console.log(card);
-  });
-  card.parentNode.remove(card);
-  return newCardContainer;
+  return arr;
 };
 
 let drawButton = document.querySelector("#draw");
