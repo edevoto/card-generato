@@ -40,17 +40,20 @@ const cardGenerator = () => {
   let inputValue = document.querySelector("#numberOfCards").value; // Creamos esto para obtener el valor del input.
 
   for (let i = 0; i < inputValue; i++) {
-    let num = randomNumber();
     let type = randomType();
 
     let div = document.createElement("DIV");
-    div.classList.add("card", "justify-content-between", type, "text-center");
-    cardContainer.appendChild(div);
-    cardArray.push({ numero: num, tipo: type });
-
+    div.classList.add(type);
     let text = document.createElement("H1");
     text.textContent = randomNumber();
     div.appendChild(text);
+    cardArray.push({
+      numero: div.className,
+      tipo: text.textContent
+    });
+    div.classList.add("card", "justify-content-between", "text-center");
+    cardContainer.appendChild(div);
+
     if (div.className.value === "diamond") {
       text.classList.add("display-2", "m-auto", "text-danger");
     } else if (div.className.value === "heart") {
@@ -59,12 +62,10 @@ const cardGenerator = () => {
       text.classList.add("display-2", "m-auto", "text-black");
     }
   }
-
-  //console.log(cardArray);
 };
 
 //Hacer un recorrido al cardArray y con el mismo metodo para mostar las cartas mostrar ya obtenidas. pero sin el random si no desde el array.
-
+let printSortedArray = [];
 const sortedArray = arr => {
   let wall = arr.length - 1; //we start the wall at the end of the array
   while (wall > 0) {
@@ -80,6 +81,10 @@ const sortedArray = arr => {
     }
     wall--; //decrease the wall for optimization
   }
+
+  arr.forEach(card => {
+    printSortedArray.push(card);
+  });
   return arr;
 };
 
@@ -88,5 +93,6 @@ drawButton.addEventListener("click", cardGenerator);
 let sortButton = document.querySelector("#sort");
 sortButton.addEventListener("click", function() {
   sortedArray(cardArray);
-  console.log(cardArray);
+
+  console.log(printSortedArray);
 });
