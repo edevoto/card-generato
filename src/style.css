@@ -50,7 +50,9 @@ body {
   font-family: "Times New Roman", Times, serif;
   font-weight: 900;
 }
-
+.text {
+  margin-top: 150px;
+}
 .card.clover::before,
 .card.clover::after {
   content: "\2663";
